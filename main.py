@@ -20,45 +20,65 @@ class Exercise:
         self.name = name
         self.sets = []
 
-    def add_set(self, Sets):
-        self.sets.append(Sets)
+    def add_sets(self, sets):
+        self.sets.append(sets)
+        
+    def add_set_to_exercise(self):
+        weight = float(input(f"Enter the weight for {self.name}: "))
+        reps = int(input(f"Enter the number of reps for {self.name}: "))
+        new_set = Sets(weight, reps)
+        self.add_sets(new_set)
 
 class Session:
     def __init__(self, date):
         self.date = date
         self.exercises = []
 
-    def add_exercise(self, Exercise):
-        self.exercises.append(Exercise)
+    def add_exercise(self, exercise):
+        self.exercises.append(exercise)
 
 class WorkoutTracker:
     def __init__(self):
         self.sessions = []
 
-    def add_session(self, Session):
-        self.sessions.append(Session)
+    def add_session(self, session):
+        self.sessions.append(session)
 
 def main():
     tracker = WorkoutTracker()
     
-    new_workout = Session("2023-01-01")
-    new_workout.add_exercise(Exercise("Bench Press"))
-    new_workout.exercises[0].add_set(Sets(50, 10))
-    new_workout.exercises[0].add_set(Sets(50, 8))
-    tracker.add_session(new_workout)
+    
+    input_date = input("Enter the date of the workout session(YYYY-MM-DD):")
+    session = Session(input_date)
+    tracker.add_session(session)
 
-    second_workout = Session("2023-01-02")
-    second_workout.add_exercise(Exercise("Squat"))
-    second_workout.exercises[0].add_set(Sets(100, 5))
-    second_workout.exercises[0].add_set(Sets(100, 3))
-    tracker.add_session(second_workout)
+    exercise_name = input("Enter the name of the exercise:")
+    exercise = Exercise(exercise_name)
+    session.add_exercise(exercise)
+
+    exercise.add_set_to_exercise()
+
+    print("Add another set to this exercise, start a new exercise, or done?")
+    while True:
+        choice = input("Enter your choice (s/e/d): ").strip().lower()
+        if choice == 's':
+            exercise.add_set_to_exercise()
+        elif choice == 'e':
+            exercise_name = input("Enter the name of the exercise:")
+            exercise = Exercise(exercise_name)
+            session.add_exercise(exercise)
+            exercise.add_set_to_exercise()
+        elif choice == 'd':
+            break
+        else:
+            print("Invalid choice. Please enter 's', 'e', or 'd'.")
 
     for session in tracker.sessions:
         print(f"Date: {session.date}")
         for exercise in session.exercises:
             print(f"Exercise: {exercise.name}")
-            for set in exercise.sets:
-                print(f"Weight: {set.weight}, Reps: {set.reps}")
+            for sets in exercise.sets:
+                print(f"Weight: {sets.weight}, Reps: {sets.reps}")
 
 if __name__ == "__main__":
     main()
