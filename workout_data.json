@@ -13,6 +13,47 @@
                     ]
                 }
             ]
+        },
+        {
+            "date": "2026-10-12",
+            "exercises": [
+                {
+                    "exercise": "squat",
+                    "sets": [
+                        {
+                            "weight": 120.0,
+                            "reps": 5
+                        },
+                        {
+                            "weight": 120.0,
+                            "reps": 4
+                        }
+                    ]
+                },
+                {
+                    "exercise": "deadlift",
+                    "sets": [
+                        {
+                            "weight": 50.0,
+                            "reps": 4
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "date": "2026-10-05",
+            "exercises": [
+                {
+                    "exercise": "lat pulldown",
+                    "sets": [
+                        {
+                            "weight": 60.0,
+                            "reps": 5
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }

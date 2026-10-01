@@ -11,18 +11,21 @@
 # Set will need the fields: weight and reps
 
 import json
+import os
 
 class Sets:
     def __init__(self, weight, reps):
         self.weight = weight
         self.reps = reps
 
+    # This method converts the Sets instance into a dictionary format.
     def to_dict(self):
         return {
             "weight": self.weight,
             "reps": self.reps
         }
 
+    #This method creates a new Sets instance from a dictionary containing the weight and reps values.
     @staticmethod
     def from_dict(data):
         return Sets(data["weight"], data["reps"])
@@ -48,12 +51,15 @@ class Exercise:
             except ValueError:
                 print("Invalid input. Please enter a valid number.")
 
+    # This method converts the Exercise instance into a dictionary format, including the exercise name and a list of sets represented as dictionaries.
     def to_dict(self):
         return {
             "exercise": self.name,
             "sets": [s.to_dict() for s in self.sets]
         }
 
+    # This method creates a new Exercise instance from a dictionary containing the exercise name and a list of sets represented as dictionaries.
+    # It uses the from_dict method of the Sets class to create Sets objects for each set in the list.
     @staticmethod
     def from_dict(data):
         exercise = Exercise(data["exercise"])
@@ -70,12 +76,15 @@ class Session:
     def add_exercise(self, exercise):
         self.exercises.append(exercise)
 
+    # This method converts the Session instance into a dictionary format, including the session date and a list of exercises represented as dictionaries.
     def to_dict(self):
         return {
             "date": self.date,
             "exercises": [e.to_dict() for e in self.exercises]
         }
 
+    # This method creates a new Session instance from a dictionary containing the session date and a list of exercises represented as dictionaries.
+    # It uses the from_dict method of the Exercise class to create Exercise objects for each exercise in the list.
     @staticmethod
     def from_dict(data):
         session = Session(data["date"])
@@ -89,11 +98,15 @@ class WorkoutTracker:
     def add_session(self, session):
         self.sessions.append(session)
 
+    # This method converts the WorkoutTracker instance into a dictionary format, including a list of sessions represented as dictionaries.
     def to_dict(self):
         return {
             "sessions": [s.to_dict() for s in self.sessions]
         }
 
+    # This method creates a new WorkoutTracker instance and populates it with Session objects created from the provided dictionary data. 
+    # It iterates through the list of sessions in the data, creating a Session object for each one using the from_dict method of the Session class,
+    # and adds them to the sessions list of the WorkoutTracker instance.
     @staticmethod
     def from_dict(data):
         tracker = WorkoutTracker()
@@ -101,7 +114,14 @@ class WorkoutTracker:
         return tracker
 
 def main():
-    
+    # Loads existing workout data from a JSON file if it exists, otherwise creates a new WorkoutTracker instance
+    if os.path.exists("workout_data.json"):
+        with open("workout_data.json", "r") as f:
+            data = json.load(f)
+            tracker = WorkoutTracker.from_dict(data)
+    else:
+        tracker = WorkoutTracker()
+
     # Creates a session and adds it to the tracker
     input_date = input("Enter the date of the workout session(YYYY-MM-DD):")
     session = Session(input_date)
@@ -131,7 +151,7 @@ def main():
         else:
             print("Invalid choice. Please enter 's', 'e', or 'd'.")
 
-    # Prints out the workout session details
+    # Prints out the workout tracker details
     for session in tracker.sessions:
         print(f"Date: {session.date}")
         for exercise in session.exercises:
