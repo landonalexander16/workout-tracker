@@ -12,6 +12,8 @@
 
 import json
 import os
+from datetime import datetime
+
 
 class Sets:
     def __init__(self, weight, reps):
@@ -122,10 +124,17 @@ def main():
     else:
         tracker = WorkoutTracker()
 
+
     # Creates a session and adds it to the tracker
-    input_date = input("Enter the date of the workout session(YYYY-MM-DD):")
-    session = Session(input_date)
-    tracker.add_session(session)
+    while True:
+        try:
+            input_date = input("Enter the date of the workout session(YYYY-MM-DD):")
+            datetime.strptime(input_date, "%Y-%m-%d") # Validates the date format to ensure it matches the expected format.
+            session = Session(input_date)
+            tracker.add_session(session)
+            break
+        except ValueError:
+            print("Invalid date format. Please enter a valid date.")
 
     # Creates Exercise object and adds it to the session
     # Unable to use a helper method because main() needs access to the current exercise when adding more sets
@@ -151,6 +160,9 @@ def main():
         else:
             print("Invalid choice. Please enter 's', 'e', or 'd'.")
 
+    # Sorts the sessions by date in ascending order
+    tracker.sessions = sorted(tracker.sessions, key=lambda s: s.date) 
+
     # Prints out the workout tracker details
     for session in tracker.sessions:
         print(f"Date: {session.date}")
@@ -159,7 +171,7 @@ def main():
             for sets in exercise.sets:
                 print(f"Weight: {sets.weight}, Reps: {sets.reps}")
 
-
+ 
     # Saves the workout session details to a JSON file
     with open("workout_data.json", "w") as f:
         json.dump(tracker.to_dict(), f, indent=4)

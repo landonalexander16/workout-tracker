@@ -15,6 +15,48 @@
             ]
         },
         {
+            "date": "2026-08-12",
+            "exercises": [
+                {
+                    "exercise": "bench",
+                    "sets": [
+                        {
+                            "weight": 120.0,
+                            "reps": 5
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "date": "2026-08-17",
+            "exercises": [
+                {
+                    "exercise": "deadlift",
+                    "sets": [
+                        {
+                            "weight": 50.0,
+                            "reps": 5
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "date": "2026-10-05",
+            "exercises": [
+                {
+                    "exercise": "lat pulldown",
+                    "sets": [
+                        {
+                            "weight": 60.0,
+                            "reps": 5
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             "date": "2026-10-12",
             "exercises": [
                 {
@@ -36,20 +78,6 @@
                         {
                             "weight": 50.0,
                             "reps": 4
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2026-10-05",
-            "exercises": [
-                {
-                    "exercise": "lat pulldown",
-                    "sets": [
-                        {
-                            "weight": 60.0,
-                            "reps": 5
                         }
                     ]
                 }
