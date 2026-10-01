@@ -1,19 +1,27 @@
 #1. A single logged set will be of an exercise, with a weight and number of repetitions.
 
 #2. Each entry will need the date, the exercise, the weight, and the reps. Each set will be tracked together
-#i.e 2 sets of bench press will be one data entry just with two different reps
+#   i.e 2 sets of bench press will be one data entry just with two different reps
 
 #3 The entries will be stored as a session (based on the date) and each session will include the exercises
-# wich will include the sets and reps.
+#  which will include the sets and reps.
 
 # A Session will need the fields: a list of Exercises and date
 # An Exercise will need the fields: name and a list of Sets
 # Set will need the fields: weight and reps
 
+import json
+
 class Sets:
     def __init__(self, weight, reps):
         self.weight = weight
         self.reps = reps
+
+    def to_dict(self):
+        return {
+            "weight": self.weight,
+            "reps": self.reps
+        }
 
 class Exercise:
     def __init__(self, name):
@@ -36,6 +44,12 @@ class Exercise:
             except ValueError:
                 print("Invalid input. Please enter a valid number.")
 
+    def to_dict(self):
+        return {
+            "exercise": self.name,
+            "sets": [s.to_dict() for s in self.sets]
+        }
+
 
 
 class Session:
@@ -46,6 +60,12 @@ class Session:
     def add_exercise(self, exercise):
         self.exercises.append(exercise)
 
+    def to_dict(self):
+        return {
+            "date": self.date,
+            "exercises": [e.to_dict() for e in self.exercises]
+        }
+
 class WorkoutTracker:
     def __init__(self):
         self.sessions = []
@@ -53,9 +73,14 @@ class WorkoutTracker:
     def add_session(self, session):
         self.sessions.append(session)
 
+    def to_dict(self):
+        return {
+            "sessions": [s.to_dict() for s in self.sessions]
+        }
+
 def main():
     tracker = WorkoutTracker()
-    
+
     # Creates a session and adds it to the tracker
     input_date = input("Enter the date of the workout session(YYYY-MM-DD):")
     session = Session(input_date)
@@ -92,6 +117,11 @@ def main():
             print(f"Exercise: {exercise.name}")
             for sets in exercise.sets:
                 print(f"Weight: {sets.weight}, Reps: {sets.reps}")
+
+
+    # Saves the workout session details to a JSON file
+    with open("workout_data.json", "w") as f:
+        json.dump(tracker.to_dict(), f, indent=4)
 
 if __name__ == "__main__":
     main()
