@@ -1,14 +1,14 @@
 {
     "sessions": [
         {
-            "date": "2026-10-01",
+            "date": "2026-01-01",
             "exercises": [
                 {
-                    "exercise": "bench press",
+                    "exercise": "bench",
                     "sets": [
                         {
                             "weight": 120.0,
-                            "reps": 5
+                            "reps": 3
                         }
                     ]
                 }

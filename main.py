@@ -23,6 +23,10 @@ class Sets:
             "reps": self.reps
         }
 
+    @staticmethod
+    def from_dict(data):
+        return Sets(data["weight"], data["reps"])
+
 class Exercise:
     def __init__(self, name):
         self.name = name
@@ -50,6 +54,12 @@ class Exercise:
             "sets": [s.to_dict() for s in self.sets]
         }
 
+    @staticmethod
+    def from_dict(data):
+        exercise = Exercise(data["exercise"])
+        exercise.sets = [Sets.from_dict(s) for s in data["sets"]]
+        return exercise
+
 
 
 class Session:
@@ -66,6 +76,12 @@ class Session:
             "exercises": [e.to_dict() for e in self.exercises]
         }
 
+    @staticmethod
+    def from_dict(data):
+        session = Session(data["date"])
+        session.exercises = [Exercise.from_dict(e) for e in data["exercises"]]
+        return session
+
 class WorkoutTracker:
     def __init__(self):
         self.sessions = []
@@ -78,9 +94,14 @@ class WorkoutTracker:
             "sessions": [s.to_dict() for s in self.sessions]
         }
 
-def main():
-    tracker = WorkoutTracker()
+    @staticmethod
+    def from_dict(data):
+        tracker = WorkoutTracker()
+        tracker.sessions = [Session.from_dict(s) for s in data["sessions"]]
+        return tracker
 
+def main():
+    
     # Creates a session and adds it to the tracker
     input_date = input("Enter the date of the workout session(YYYY-MM-DD):")
     session = Session(input_date)
