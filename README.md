@@ -34,7 +34,7 @@ When you run the program, you'll be prompted to log a workout session:
 - Enter the number of reps for Bench Press: 6
   ...
 
-At the end of the session, your data is saved to 'workout_data.json'. sorted chronologically by date. The next time you run the program, it loads previous sessions automatically.
+At the end of the session, your data is saved to 'workout_data.json'. sorted chronologically by date. The next time you run the program, it automatically loads previous sessions.
 
 ## Technical notes
 
@@ -47,4 +47,9 @@ At the end of the session, your data is saved to 'workout_data.json'. sorted chr
 - Analytics: max weight per exercise, total volume per session. plateau detection
 - Data visualization with matplotlib (progress charts over time)
 - Web version (Flask or Django) with a persistent database backend
+
+https://github.com/user-attachments/assets/6fc797c6-6927-4bd4-b7a4-2af691fa4d53
+
+
+
 
