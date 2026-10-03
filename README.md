@@ -43,13 +43,12 @@ At the end of the session, your data is saved to 'workout_data.json'. sorted chr
 - **Input validation**: numeric input (weight, reps) and date input are each wrapped in 'try'/'except' retry loops, so malformed input prompts a re-ask instead of crashing the program.
 - **Sorting** sessions are sorted chronologically using Python's 'sorted()' with a 'lambda' key function, relying on a consistent 'YYYY-MM-DD' date format for correct string-based ordering.
 
+## Demo Video
+
+https://github.com/user-attachments/assets/6fc797c6-6927-4bd4-b7a4-2af691fa4d53
+
 ## Planned Features
 - Analytics: max weight per exercise, total volume per session. plateau detection
 - Data visualization with matplotlib (progress charts over time)
 - Web version (Flask or Django) with a persistent database backend
-
-https://github.com/user-attachments/assets/6fc797c6-6927-4bd4-b7a4-2af691fa4d53
-
-
-
 
